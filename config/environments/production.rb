@@ -52,4 +52,6 @@ PersonManagement::Application.configure do
   #上面的网址学习厚，加了下面的内容
   config.eager_load = false
   config.active_record.migration_error = :page_load;
+
+  config.assets.compile = true
 end
