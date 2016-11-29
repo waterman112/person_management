@@ -12,24 +12,21 @@ class SessionsController < ApplicationController
     #这里我还要考虑是否存在重复的问题
     puts "---#{session_params}---"
 
-    Session.all.each do |f|
-      if f.session_name != params[:session][:session_name] || f.session_name != params[:session][:class_name]
-        #将新建的届，班级，存入到数据库中去
-        @session = Session.create session_params
-        redirect_to session_path(@session)
-        #puts "---#{session_params}---"
-      else
-        #返回一个信息，告知存在重复
-        @error = "#{params}信息已存入数据库"
-      end
+    #将前端数据，与后端进行对比，如果相同，则返回错误，如果不同，则存入数据库
+    #两种方法：
+    #1将数据和后端每个都进行对比，如果相同，则不存入。这有个问题，如果对比时前几个都不同，那么就得执行好几次if 操作。
+    #
+    #2将前端数据,通过where查询的方式，如果查询不到，则认为数据库中没有这条记录，则将记录存入数据库。
 
-
-
+    @result = Session.where("sessio_name=?",params[:session][:session_name]).where("class_name",params[:session][:class_name])
+    puts "ooo#{@result}ooo"
+    if @result == nil
+      @session = Session.create session_params
+      redirect_to session_path(@session)
+    else
+      @result = "数据重复"
+      redirect_to new_session_path
     end
-
-
-
-
 
 
 
