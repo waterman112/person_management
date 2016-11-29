@@ -40,3 +40,10 @@ module PersonManagement
     config.filter_parameters += [:password]
   end
 end
+
+module ActionView
+  class Base
+    cattr_accessor :debug_rjs
+    @@debug_rjs = false
+  end
+end
