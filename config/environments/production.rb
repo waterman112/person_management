@@ -46,4 +46,10 @@ PersonManagement::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+
+  #http://mensfeld.pl/2013/06/upgrading-to-rails-4-0-from-rails-3-2-test-case-part-i-preparations-configuration-gems/
+  #上面的网址学习厚，加了下面的内容
+  config.eager_load = false
+  config.active_record.migration_error = :page_load;
 end
