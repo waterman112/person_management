@@ -18,13 +18,14 @@ class SessionsController < ApplicationController
     #
     #2将前端数据,通过where查询的方式，如果查询不到，则认为数据库中没有这条记录，则将记录存入数据库。
 
-    @result = Session.where("sessio_name=?",params[:session][:session_name]).where("class_name",params[:session][:class_name])
-    puts "ooo#{@result}ooo"
-    if @result == nil
+    @result = Session.where("session_name=?",params[:session][:session_name]).where("class_name=?",params[:session][:class_name])
+    puts "oooooooooooooooooooooo#{@result}ooo"
+
+    #这里的困惑  empty? 和 nil 之间的关系？
+    if @result.empty?
       @session = Session.create session_params
       redirect_to session_path(@session)
     else
-      @result = "数据重复"
       redirect_to new_session_path
     end
 
