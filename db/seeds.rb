@@ -6,7 +6,7 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
-    People.create(:name => "小1", :sex => "男", :age => "14", :id_card => "332020202020202020", :role => "学生", :phone => "100", :email => "11@qq.com", :person_number => 191 , :state_id => 1 )
+    User.create(:name => "小1", :sex => "男", :age => "14", :id_card => "332020202020202020", :role => "学生", :phone => "100", :email => "11@qq.com", :person_number => 191 , :state_id => 1 )
 
     #Person.create(
     # {:name => "小2", :sex => "女", :age => "15", :id_card => "332020202020202020", :role => "学生", :phone => "10010101010", :email => "11@qq.com", :person_number => 191 , :state_id => 1 }

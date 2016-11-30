@@ -1,7 +1,7 @@
 
-<h2>people new</h2>
+<h2>修改人员</h2>
 
-<%= form_for @people, html: {id: "formid"} do |f| %>
+<%= form_for @user, url: user_path(@user), match: :patch, html: {id: "formid"} do |f| %>
   <p>
     <%= f.label "名字" %>
     <%= f.text_field :name, placeholder: "请填入姓名"  %>
@@ -53,10 +53,6 @@
 
 <% end %>
 
-  <!--如果填入的信息存在重复，这里就是提示信息显示的地方-->
-  <% if @result %>
-    <p><%= @result %></p>
-  <% end %>
 
 <script>
 
@@ -64,12 +60,34 @@
   //然后，form内部的input框，所有的限制条件，写在rules中。
   $('#formid').validate({
     rules:{
-      "people[session_name]": {
+      "user[name]": {
         required: true,
-        minlength:4,
+      },
+      "user[sex]": {
+        required: true,
+      },
+      "user[age]": {
+        required: true,
         digits:true
       },
-      "session[class_name]": {
+      "user[id_card]": {
+        required: true,
+      },
+      "user[role]": {
+        required: true,
+      },
+      "user[phone]": {
+        required: true,
+        digits:true
+      },
+      "user[email]": {
+        required: true,
+      },
+      "user[person_number]": {
+        required: true,
+        digits:true
+      },
+      "user[state_id]": {
         required: true,
         digits:true
       }

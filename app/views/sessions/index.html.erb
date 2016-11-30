@@ -10,7 +10,7 @@
   <%= link_to "新增班级", new_session_path %>
 </p>
 <% @sessions.each do |f| %>
-  <table>
+  <table class="table table-bordered">
     <tr>
       <td>高 <%= f.session_name %> </td>
       <td> (<%= f.class_name %>)&nbsp; 班 </td>

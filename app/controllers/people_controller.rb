@@ -6,6 +6,7 @@ class PeopleController < ApplicationController
   end
 
   def new
+    @people = People.new
   end
 
   def create
@@ -30,6 +31,6 @@ class PeopleController < ApplicationController
 
   private
   def person_params
-    params.require(:person).permit(:name, :sex, :age, :id_card, :role, :phone, :email, :person_number, :state_id)
+    params.require(:people).permit(:name, :sex, :age, :id_card, :role, :phone, :email, :person_number, :state_id)
   end
 end

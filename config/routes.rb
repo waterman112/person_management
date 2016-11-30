@@ -1,7 +1,11 @@
 PersonManagement::Application.routes.draw do
 
+  devise_for :users
   #resources :persons
-  resources :people
+
+  #resources :people
+
+  resources :users
   resources :sessions
 
 
