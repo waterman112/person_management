@@ -1,0 +1,74 @@
+
+
+
+<h2>班级年级编辑页面</h2>
+
+<%= form_for @session, url: session_path(@session), method: :patch, html: {id: "formid"} do |f| %>
+  <p>
+    <%= f.label "学生入学学年" %>
+    <%= f.text_field :session_name, placeholder: "请填入数字"  %>
+  </p>
+
+  <p>
+    <%= f.label "学生所在班级" %>
+    <%= f.text_field :class_name, placeholder: "请填入数字" %>
+  </p>
+
+  <p>
+    <%= f.label "班级状态" %>
+    <%= f.collection_select(:state_id, State.where('role = 1'), :id, :state_name) %>
+  </p>
+
+  <p>
+    <%= f.submit '提交'%>
+  </p>
+
+<% end %>
+
+  <!--如果填入的信息存在重复，这里就是提示信息显示的地方-->
+  <!--这里貌似无法进行@message的传递-->
+  <% if @message %>
+    <p>您输入的数据在数据库中已有存档，请您仔细检查</p>
+  <% end %>
+
+<script>
+
+  //这里对form进行验证,重要的事情请重视起来，用到插件jquery.validate.js
+  //然后，form内部的input框，所有的限制条件，写在rules中。
+  $('#formid').validate({
+    rules:{
+      "session[session_name]": {
+        required: true,
+        minlength:4,
+        digits:true
+      },
+      "session[class_name]": {
+        required: true,
+        digits:true
+      }
+    }
+  });
+
+  //这是对英文注释的中文翻译
+  jQuery.extend(jQuery.validator.messages, {
+    required: "输入框不能为空",
+    remote: "请修正该字段",
+    email: "请输入正确格式的电子邮件",
+    url: "请输入合法的网址",
+    date: "请输入合法的日期",
+    dateISO: "请输入合法的日期 (ISO).",
+    number: "请输入合法的数字",
+    digits: "只能输入整数",
+    creditcard: "请输入合法的信用卡号",
+    equalTo: "请再次输入相同的值",
+    accept: "请输入拥有合法后缀名的字符串",
+    maxlength: jQuery.validator.format("请输入一个 长度最多是 {0} 的数字"),
+    minlength: jQuery.validator.format("请输入一个 长度最少是 {0} 的数字"),
+    rangelength: jQuery.validator.format("请输入 一个长度介于 {0} 和 {1} 之间的数字"),
+    range: jQuery.validator.format("请输入一个介于 {0} 和 {1} 之间的值"),
+    max: jQuery.validator.format("请输入一个最大为{0} 的值"),
+    min: jQuery.validator.format("请输入一个最小为{0} 的值")
+  });
+
+
+</script>

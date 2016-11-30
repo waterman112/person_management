@@ -10,4 +10,39 @@
 问题2:
 https://github.com/rails/prototype-rails/issues/10
 
+问题3：
+empty?   和   nil  之间的关系？
+
+比方说：  假设@result是空  比较下面两种情况
+
+@resuslt == nil
+
+@result.empty?
+
+问题4：
+
+#在重定向的时候，传值。
+redirect_to edit_session_path({id: @session.id, message: 1})
+
+重新理解redirect_to .
+redirect_to 是向浏览器发送响应，让浏览器去请求另外的url，其中，如果你想要这个url带参数，则可以像上面所表示的例子一样，带参数。
+参数的形式为 hash.
+
+最后请求的url的样子为
+/sessions/6/edit?message=1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -1,0 +1,23 @@
+
+<style>
+  body{
+    width:200px; margin:50px auto;
+  }
+</style>
+
+<p>班级资料库</p>
+<p>
+  <%= link_to "新增班级", new_session_path %>
+</p>
+<% @sessions.each do |f| %>
+  <table>
+    <tr>
+      <td>高 <%= f.session_name %> </td>
+      <td> (<%= f.class_name %>)&nbsp; 班 </td>
+      <td>&nbsp;&nbsp;&nbsp;<%= State.where("id = #{ f.state_id}").first.state_name %> </td>
+      <td><%= link_to "查看", session_path(f)  %></td>
+      <td><%= link_to "编辑", edit_session_path(f) %></td>
+      <td><%= link_to "删除", session_path(f), method: :delete, data:{confirm: "您确定删除"} %></td>
+    </tr>
+  </table>
+<% end %>
