@@ -8,7 +8,6 @@ class SessionsController < ApplicationController
 
   def create
 
-
     #这里我还要考虑是否存在重复的问题
     puts "---#{session_params}---"
 
@@ -28,12 +27,10 @@ class SessionsController < ApplicationController
     else
       redirect_to new_session_path
     end
-
-
-
   end
 
   def show
+    @session = Session.find params[:id]
   end
 
   def edit
