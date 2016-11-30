@@ -1,6 +1,7 @@
 PersonManagement::Application.routes.draw do
 
-  resources :persons
+  #resources :persons
+  resources :people
   resources :sessions
 
 

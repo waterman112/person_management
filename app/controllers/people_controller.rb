@@ -1,7 +1,8 @@
 class PeopleController < ApplicationController
 
   def index
-    @persons = Person.all
+    puts "xxxxxxxxpeople.all=#{Person.all.inspect}"
+    @people = Person.all
   end
 
   def new
