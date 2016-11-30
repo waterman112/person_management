@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   before_filter :authenticate_user!
+
   def index
     @sessions = Session.order(session_name: :asc).all
     @sessions.map do |f|
