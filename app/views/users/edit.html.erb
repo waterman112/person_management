@@ -1,7 +1,7 @@
 
 <h2>修改人员</h2>
 
-  <form action="" method="" id="formid">
+  <form action="/users" method="post" id="formid">
     <p>
     姓名：<input type="text" name="name" placeholder:"请输入姓名">
     </p>
@@ -14,17 +14,36 @@
     <input type="text" name="age" placeholder:"请输入姓名">
     </p>
     <p>
+    身份证：
     <input type="text" name="id_card" placeholder:"请输入姓名">
     </p>
-
+    <p>
+    角色：
     <input type="text" name="role" placeholder:"请输入姓名">
+    </p>
+    <p>
+    电话：
     <input type="text" name="phone" placeholder:"请输入姓名">
+    </p>
+    <p>
+    邮箱：
     <input type="text" name="email" placeholder:"请输入姓名">
+    </p>
+    <p>
+    借书证：
     <input type="text" name="person_number" placeholder:"请输入姓名">
+    </p>
+    <p>
+    状态：
     <input type="text" name="state" placeholder:"请输入姓名">
+    </p>
+    <p>
+    年级：
     <input type="text" name="period_name" placeholder:"请输入姓名">
-    <input type="text" name="class_name" placeholder:"请输入姓名">
-    <input type="submit" placeholder:"请输入姓名">
+    </p>
+    <p>
+      <%= select_tag @period, options_from_collection_for_select(@periods, "id", "name")  %>
+    </p>
   </form>
 
 

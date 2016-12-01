@@ -33,6 +33,7 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find params[:id]
+    @periods = Period.all
   end
 
   def update
