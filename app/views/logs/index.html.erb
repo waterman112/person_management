@@ -1,0 +1,22 @@
+
+<table class="table table-devise">
+  <tr>
+    <th>姓名</th>
+    <th>状态</th>
+    <th>具体情况</th>
+    <th>开始时间</th>
+    <th>截止日期</th>
+  </tr>
+  <% @logs.each do |f| %>
+    <tr>
+      <td><%= f.user_id %></td>
+      <td><%= f.state_id %></td>
+      <td><%= f.content %></td>
+      <td><%= f.start_date %></td>
+      <td><%= f.end_date %></td>
+      <td><%= link_to "查看", log_path(f) %></td>
+      <td><%= link_to "编辑", edit_log_path(f) %></td>
+      <td><%= link_to "删除", log_path(f), method: :delete, data:{confirm:"您确定删除!"} %></td>
+    </tr>
+  <% end %>
+</table>

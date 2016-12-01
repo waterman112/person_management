@@ -1,12 +1,20 @@
 PersonManagement::Application.routes.draw do
 
-  devise_for :users
-  #resources :persons
+  root  "periods#index"
 
-  #resources :people
-
-  resources :users
-  resources :sessions
+#  devise_for :users
+  resources :users do
+     collection do
+       get :show_user
+     end
+  end
+  #resources :sessions
+  resources :logs
+  resources :periods do
+    collection do
+      get :show_period
+    end
+  end
 
 
 

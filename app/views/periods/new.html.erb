@@ -1,51 +1,24 @@
 
 
-<h2>新建人员</h2>
+<h2>创建班级年级的首页</h2>
+<p style="padding: 10px 0;">
+  <%= link_to "返回", periods_path %>
+</p>
 
-<%= form_for @user, url: users_path, html: {id: "formid"} do |f| %>
+<%= form_for @period, html: {id: "formid"} do |f| %>
   <p>
-    <%= f.label "名字" %>
-    <%= f.text_field :name, placeholder: "请填入姓名"  %>
+    <%= f.label "学生入学学年" %>
+    <%= f.text_field :period_name, placeholder: "请填入数字"  %>
   </p>
 
   <p>
-    <%= f.label "性别" %>
-    <%= f.text_field :sex, placeholder: "请填入性别" %>
+    <%= f.label "学生所在班级" %>
+    <%= f.text_field :class_name, placeholder: "请填入数字" %>
   </p>
 
   <p>
-    <%= f.label "年龄" %>
-    <%= f.text_field :age, placeholder: "请填入年龄" %>
-  </p>
-
-  <p>
-    <%= f.label "身份证号" %>
-    <%= f.text_field :id_card %>
-  </p>
-
-  <p>
-    <%= f.label "角色" %>
-    <%= f.text_field :role, placeholder: "请填入老师或者学生" %>
-  </p>
-
-  <p>
-    <%= f.label "手机号" %>
-    <%= f.text_field :phone %>
-  </p>
-
-  <p>
-    <%= f.label "邮箱" %>
-    <%= f.text_field :email %>
-  </p>
-
-  <p>
-    <%= f.label "借书证" %>
-    <%= f.text_field :age %>
-  </p>
-
-  <p>
-    <%= f.label "人员状态" %>
-    <%= f.text_field :state_id %>
+    <%= f.label "班级状态" %>
+    <%= f.collection_select(:state_id, State.where('role = 1'), :id, :state_name) %>
   </p>
 
   <p>
@@ -54,40 +27,23 @@
 
 <% end %>
 
+  <!--如果填入的信息存在重复，这里就是提示信息显示的地方-->
+  <% if @result %>
+    <p><%= @result %></p>
+  <% end %>
+
 <script>
 
   //这里对form进行验证,重要的事情请重视起来，用到插件jquery.validate.js
   //然后，form内部的input框，所有的限制条件，写在rules中。
   $('#formid').validate({
     rules:{
-      "user[name]": {
+      "period[period_name]": {
         required: true,
-      },
-      "user[sex]": {
-        required: true,
-      },
-      "user[age]": {
-        required: true,
+        minlength:4,
         digits:true
       },
-      "user[id_card]": {
-        required: true,
-      },
-      "user[role]": {
-        required: true,
-      },
-      "user[phone]": {
-        required: true,
-        digits:true
-      },
-      "user[email]": {
-        required: true,
-      },
-      "user[person_number]": {
-        required: true,
-        digits:true
-      },
-      "user[state_id]": {
+      "period[class_name]": {
         required: true,
         digits:true
       }
@@ -114,4 +70,6 @@
     max: jQuery.validator.format("请输入一个最大为{0} 的值"),
     min: jQuery.validator.format("请输入一个最小为{0} 的值")
   });
+
+
 </script>

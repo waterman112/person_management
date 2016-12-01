@@ -1,0 +1,22 @@
+
+
+<!--这里应该展示所有的搜到的信息-->
+<table class="table table-devise">
+  <% if @results %>
+    <% @results.each do |f| %>
+      <tr>
+        <td><%= f.name %></td>
+        <td><%= f.sex %></td>
+        <td><%= f.age %></td>
+        <td><%= f.id_card %></td>
+        <td><%= f.role %></td>
+        <td><%= f.phone %></td>
+        <td><%= f.email %></td>
+        <td><%= f.person_number %></td>
+        <td><%= f.state_id %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= link_to "返回", users_path %>

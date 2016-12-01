@@ -10,3 +10,4 @@ gem 'jquery-rails'
 
 gem 'devise','3.4.0'
 gem 'cancancan', '~>1.10'
+

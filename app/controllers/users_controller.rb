@@ -1,9 +1,8 @@
 class UsersController < ApplicationController
 
-  before_filter :authenticate_user!
+  #before_filter :authenticate_user!
 
   def index
-    puts "xxxxxxxxpeople.all=#{User.all.inspect}"
     @users = User.all
   end
 
@@ -12,12 +11,24 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create user_params
-    redirect_to @user
+    #@user = User.new user_params
+    #if @user.save
+    #  redirect_to user_path(@user)
+    #elsif
+    #  puts "#{@user}"
+    #  render :text => "lala"
+    #end
+    User.create user_params
+    puts "xixixixixxi=#{user_params}"
+    #@user = User.new user_params
+    puts "xixixixixxi=#{@user.inspect}"
+    #render :text => 'alalal'
+    redirect_to users_path
   end
 
   def show
     @user = User.find params[:id]
+    @logs = Log.where("user_id = ?", params[:id])
   end
 
   def edit
@@ -29,7 +40,6 @@ class UsersController < ApplicationController
     @user.update user_params
 
     redirect_to users_path
-
   end
 
   def destroy
@@ -38,6 +48,26 @@ class UsersController < ApplicationController
     @user.destroy
 
     redirect_to users_path
+  end
+
+  def show_user
+
+    puts "xxxxxuser_search=#{params}"
+    if params[:name] == ''
+      if params[:state_name] == ''
+        @results = User.all
+      elsif
+        @results = User.where("state_name = ?", params[:state_name])
+      end
+    elsif
+      if params[:state_name] == ''
+        @results = User.where('name = ?', params[:name])
+      elsif
+        @results = User.where('name = ?', params[:name]).where('state_name = ?', params[:state_name])
+      end
+    end
+    #puts "xxxxxuser_search=#{params[:name]}"
+    #render :text => "lalala"
   end
 
   private

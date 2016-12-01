@@ -1,0 +1,20 @@
+
+<!--这里应该展示所有的搜到的信息-->
+<table class="table table-devise">
+  <tr>
+    <td>第几届</td>
+    <td>班级</td>
+    <td>状态</td>
+  </tr>
+  <% if @results %>
+    <% @results.each do |f| %>
+      <tr>
+        <td><%= f.period_name %></td>
+        <td><%= f.class_name %></td>
+        <td><%= f.state_id %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>
+
+<%= link_to "返回", periods_path %>

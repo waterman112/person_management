@@ -1,4 +1,15 @@
 
+<form action="/users/show_user" method="get" >
+  查询：
+  <!--姓名-->
+  <input type="text" name="name" value="" placeholder="填写名字" />
+  <input type="text" name="state_name" value="" placeholder="填写状态" />
+
+  <input type="submit" value="提交" />
+</form>
+
+<!--新建学生按钮-->
+<%= link_to "新建学生", new_user_path %>
 
 <table class="table table-bordered" style="width:80%; margin:80px auto;">
   <tr>
@@ -30,6 +41,8 @@
       <td><%= link_to "查看", user_path(f) %></td>
       <td><%= link_to "编辑", edit_user_path(f) %></td>
       <td><%= link_to "删除", user_path(f), method: :delete, data:{confirm:"您确定删除!"} %></td>
+      <td></td>
+      <td><%= link_to "编辑记录", new_log_path(f)  %></td>
     </tr>
   <% end %>
 </table>

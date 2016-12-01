@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161130090834) do
+ActiveRecord::Schema.define(version: 20161201020336) do
 
   create_table "grades", force: :cascade do |t|
     t.integer "user_id",    limit: 4
@@ -36,6 +36,12 @@ ActiveRecord::Schema.define(version: 20161130090834) do
     t.string  "email",         limit: 255
     t.integer "person_number", limit: 4
     t.integer "state_id",      limit: 4
+  end
+
+  create_table "periods", force: :cascade do |t|
+    t.integer "period_name", limit: 4
+    t.integer "class_name",  limit: 4
+    t.integer "state_id",    limit: 4
   end
 
   create_table "persons", force: :cascade do |t|

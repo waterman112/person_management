@@ -1,0 +1,24 @@
+<div style="width:200px; margin:50px auto;">
+  <p>
+    <strong>年级：</strong>
+    <%= @period.period_name  %>
+  </p>
+
+  <p>
+    <strong>班级：</strong>
+    <%= @period.class_name  %>
+  </p>
+
+  <!--这里需要注意，找到的是数组的格式，所以，还需要从数组的格式中取到我们需要的那个数据
+      还要注意 where语句需要用到  双引号。
+
+  -->
+  <p>
+    <strong>班级状态：</strong>
+    <%= State.where(" id = #{@period.state_id} ").first.state_name %>
+  </p>
+
+  <p>
+    <%= link_to "返回", periods_path  %>
+  </p>
+</div>

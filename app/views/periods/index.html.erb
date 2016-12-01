@@ -1,0 +1,32 @@
+
+<style>
+  body{
+    width:200px; margin:50px auto;
+  }
+
+</style>
+
+<p>班级资料库</p>
+<p>
+  <%= link_to "新增班级", new_period_path %>
+</p>
+
+<form action="/periods/show_period" method="get" >
+  查找年级：
+  <!--年级-->
+  <input type="text" name="period_name" value="" />
+  <input type="submit" value="提交" />
+</form>
+
+<% @periods.each do |f| %>
+  <table class="table table-bordered" >
+    <tr>
+      <td>高 <%= f.period_name %> </td>
+      <td> (<%= f.class_name %>)&nbsp; 班 </td>
+      <td>&nbsp;&nbsp;&nbsp;<%= State.where("id = #{ f.state_id}").first.state_name %> </td>
+      <td><%= link_to "查看", period_path(f)  %></td>
+      <td><%= link_to "编辑", edit_period_path(f) %></td>
+      <td><%= link_to "删除", period_path(f), method: :delete, data:{confirm: "您确定删除"} %></td>
+    </tr>
+  </table>
+<% end %>

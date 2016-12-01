@@ -44,6 +44,15 @@
     <%= @user.state_id %>
   </p>
 
+  <!--log-->
+  <% @logs.each do |f| %>
+    <div>
+      <p><%= f.start_date %></p>
+      <p><%= f.end_date %></p>
+    </div>
+  <% end %>
+
+  <!--返回-->
   <p>
     <%= link_to "返回", users_path  %>
   </p>
