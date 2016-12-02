@@ -1,62 +1,59 @@
 
   <h2>修改人员</h2>
-
-  <!--这个form应该打到create路由-->
-  <form action="/users" method="post" id="formid">
-    <!--authenticity-->
-    <input type="hidden" name="authenticity_token" value="" />
-    <!--以下是学生的基本信息-->
+  <%= form_for @user, url: user_path(@user), method: :patch, html: {id: "formid"} do |f| %>
     <p>
-      姓名：<input type="text" name="user[name]" placeholder:"请输入姓名">
+      <%= f.label "名字" %>
+      <%= f.text_field :name, placeholder: "请填入姓名"  %>
     </p>
     <p>
-      性别：
-      <input type="text" name="user[sex]" placeholder:"请输入姓名">
+      <%= f.label "性别" %>
+      <%= f.text_field :sex, placeholder: "请填入性别" %>
     </p>
     <p>
-      年龄：
-      <input type="text" name="user[age]" placeholder:"请输入姓名">
+      <%= f.label "年龄" %>
+      <%= f.text_field :age, placeholder: "请填入年龄" %>
     </p>
     <p>
-      身份证：
-      <input type="text" name="user[id_card]" placeholder:"请输入姓名">
+      <%= f.label "身份证号" %>
+      <%= f.text_field :id_card %>
     </p>
     <p>
-      电话：
-      <input type="text" name="user[phone]" placeholder:"请输入姓名">
+      <%= f.label "手机号" %>
+      <%= f.text_field :phone %>
     </p>
     <p>
-      邮箱：
-      <input type="text" name="user[email]" placeholder:"请输入姓名">
+      <%= f.label "邮箱" %>
+      <%= f.text_field :email %>
     </p>
     <p>
-      借书证：
-      <input type="text" name="user[person_number]" placeholder:"请输入姓名">
+      <%= f.label "借书证" %>
+      <%= f.text_field :age %>
     </p>
     <p>
       角色：
-      <select name="user[role]">
-        <option>老师</option>
-        <option>学生</option>
-      </select>
+      <%= select_tag "user[role]", options_for_select([ ['老师','老师'],['学生','学生']], @user.role) %>
     </p>
     <p>
       人员状态：
-      <%= select_tag "user[state_id]", options_from_collection_for_select(State.where("role = 0"), :id, :state_name) %>
+      <%= select_tag "user[state_id]", options_from_collection_for_select(State.where("role = 0"), :id, :state_name, @user.state_id) %>
     </p>
     <p>
-    <%= select_tag "period[period_name]", options_from_collection_for_select(Period.select(:period_name).distinct, :id, :period_name) %>
-    届
-    <%= select_tag "period[class_id]", options_from_collection_for_select(Period.select(:class_name).distinct, :id, :class_name) %>
-    班
-    <!--班级state用1代替-->
-    <%= select_tag "period[state_id]", options_from_collection_for_select(State.where("role = 1"), :id, :state_name) %>
+    <!--
+      这里的输入框居然是空的，真的难以理解。
+      居然没有id值，让我很困惑
+    -->
+      <%= select_tag "period[period_name]", options_from_collection_for_select(Period.select(:period_name).distinct, :id, :period_name, @period.first.period_name) %>
+      届
+      <%= select_tag "period[class_name]", options_from_collection_for_select(Period.select(:class_name).distinct, :id, :class_name, @period.first.class_name) %>
+      班
+      <!--班级的state用1代替-->
+      <%= select_tag "period[state_id]", options_from_collection_for_select(State.where("role = 1"), :id, :state_name, @state.first.state_name) %>
     </p>
-    <!--这个是提交按钮-->
     <p>
-      <input type="submit" value="提交" />
+      <%= f.submit '提交'%>
     </p>
-  </form>
+  <% end %>
+
 <script>
 
   //这里对form进行验证,重要的事情请重视起来，用到插件jquery.validate.js
@@ -74,17 +71,17 @@
         digits:true
       },
       "user[id_card]": {
-        required: true,
+        required: true
       },
       "user[role]": {
-        required: true,
+        required: true
       },
       "user[phone]": {
         required: true,
         digits:true
       },
       "user[email]": {
-        required: true,
+        required: true
       },
       "user[person_number]": {
         required: true,
@@ -94,15 +91,26 @@
         required: true,
         digits:true
       },
+      "period[period_name]":{
+        required: true
+      },
+      "period[class_name]":{
+        required: true
+      },
+      "period[state_id]":{
+        required: true
+      }
+  /*,
       "period[period_name]": {
-        required: true,
+        required: true
       },
       "period[class_name]": {
-        required: true,
+        required: true
       },
       "period[state_id]": {
-        required: true,
+        required: true
       }
+      */
     }
   });
 

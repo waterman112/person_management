@@ -23,14 +23,23 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find params[:id]
-    @period = @user.period
-    @state =
+    @period = @user.periods
+    @state = @user.states
+    puts "xxxxedit@period=#{@period.inspect}x"
+    puts "xxxxedit@period=#{@period.first.period_name}x"
+    #puts "xxxxedit@state=#{@state}"
   end
 
   def update
+    #puts "xxxxupdate=#{params}"
     @user = User.find params[:id]
-    @user.update user_params
-    redirect_to users_path
+    @period = Period.find params[:id]
+    puts "xxx@user=#{@user.inspect}"
+    puts "xxxupdateparams=#{params}"
+    #@user.update user_params
+    #@period.update :period_name => params[:period][:period_name], :class_name => params[:period][:class_name], :state_id => params[:period][:state_id]
+    render :text => 'lala'
+    #redirect_to users_path
   end
 
   def destroy
@@ -40,7 +49,7 @@ class UsersController < ApplicationController
   end
 
   def show_user
-    puts "xxxxxuser_search=#{params}"
+    #puts "xxxxxuser_search=#{params}"
     if params[:name] == ''
       if params[:state_name] == ''
         @results = User.all
