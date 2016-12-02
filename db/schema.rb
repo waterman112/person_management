@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201020336) do
+ActiveRecord::Schema.define(version: 20161202001319) do
 
   create_table "grades", force: :cascade do |t|
-    t.integer "user_id",    limit: 4
-    t.integer "session_id", limit: 4
+    t.integer "user_id",   limit: 4
+    t.integer "period_id", limit: 4
   end
 
   create_table "logs", force: :cascade do |t|

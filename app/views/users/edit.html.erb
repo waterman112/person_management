@@ -1,88 +1,107 @@
 
-<h2>修改人员</h2>
+  <h2>修改人员</h2>
 
+  <!--这个form应该打到create路由-->
   <form action="/users" method="post" id="formid">
+    <!--authenticity-->
+    <input type="hidden" name="authenticity_token" value="" />
+    <!--以下是学生的基本信息-->
     <p>
-    姓名：<input type="text" name="name" placeholder:"请输入姓名">
+      姓名：<input type="text" name="user[name]" placeholder:"请输入姓名">
     </p>
     <p>
-    性别：
-    <input type="text" name="sex" placeholder:"请输入姓名">
+      性别：
+      <input type="text" name="user[sex]" placeholder:"请输入姓名">
     </p>
     <p>
-    年龄：
-    <input type="text" name="age" placeholder:"请输入姓名">
+      年龄：
+      <input type="text" name="user[age]" placeholder:"请输入姓名">
     </p>
     <p>
-    身份证：
-    <input type="text" name="id_card" placeholder:"请输入姓名">
+      身份证：
+      <input type="text" name="user[id_card]" placeholder:"请输入姓名">
     </p>
     <p>
-    角色：
-    <input type="text" name="role" placeholder:"请输入姓名">
+      电话：
+      <input type="text" name="user[phone]" placeholder:"请输入姓名">
     </p>
     <p>
-    电话：
-    <input type="text" name="phone" placeholder:"请输入姓名">
+      邮箱：
+      <input type="text" name="user[email]" placeholder:"请输入姓名">
     </p>
     <p>
-    邮箱：
-    <input type="text" name="email" placeholder:"请输入姓名">
+      借书证：
+      <input type="text" name="user[person_number]" placeholder:"请输入姓名">
     </p>
     <p>
-    借书证：
-    <input type="text" name="person_number" placeholder:"请输入姓名">
+      角色：
+      <select name="user[role]">
+        <option>老师</option>
+        <option>学生</option>
+      </select>
     </p>
     <p>
-    状态：
-    <input type="text" name="state" placeholder:"请输入姓名">
+      人员状态：
+      <%= select_tag "user[state_id]", options_from_collection_for_select(State.where("role = 0"), :id, :state_name) %>
     </p>
     <p>
-    年级：
-    <input type="text" name="period_name" placeholder:"请输入姓名">
+    <%= select_tag "period[period_name]", options_from_collection_for_select(Period.select(:period_name).distinct, :id, :period_name) %>
+    届
+    <%= select_tag "period[class_id]", options_from_collection_for_select(Period.select(:class_name).distinct, :id, :class_name) %>
+    班
+    <!--班级state用1代替-->
+    <%= select_tag "period[state_id]", options_from_collection_for_select(State.where("role = 1"), :id, :state_name) %>
     </p>
+    <!--这个是提交按钮-->
     <p>
-      <%= select_tag @period, options_from_collection_for_select(@periods, "id", "name")  %>
+      <input type="submit" value="提交" />
     </p>
   </form>
-
-
 <script>
 
   //这里对form进行验证,重要的事情请重视起来，用到插件jquery.validate.js
   //然后，form内部的input框，所有的限制条件，写在rules中。
   $('#formid').validate({
     rules:{
-      "name": {
+      "user[name]": {
         required: true,
       },
-      "sex": {
+      "user[sex]": {
         required: true,
       },
-      "age": {
+      "user[age]": {
         required: true,
         digits:true
       },
-      "id_card": {
+      "user[id_card]": {
         required: true,
       },
-      "role": {
+      "user[role]": {
         required: true,
       },
-      "phone": {
+      "user[phone]": {
         required: true,
         digits:true
       },
-      "email": {
+      "user[email]": {
         required: true,
       },
-      "person_number": {
+      "user[person_number]": {
         required: true,
         digits:true
       },
-      "state_id": {
+      "user[state_id]": {
         required: true,
         digits:true
+      },
+      "period[period_name]": {
+        required: true,
+      },
+      "period[class_name]": {
+        required: true,
+      },
+      "period[state_id]": {
+        required: true,
       }
     }
   });
@@ -107,6 +126,5 @@
     max: jQuery.validator.format("请输入一个最大为{0} 的值"),
     min: jQuery.validator.format("请输入一个最小为{0} 的值")
   });
-
-
 </script>
+

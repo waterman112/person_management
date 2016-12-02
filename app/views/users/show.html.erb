@@ -41,14 +41,23 @@
 
   <p>
     <strong>状态:</strong>
-    <%= @user.state_id %>
+    <%= State.where("id = ?", @user.state_id).first.state_name %>
+  </p>
+
+  <!--人员所在年级班级的情况-->
+  <p>
+    年级：<%= @user.periods.first.period_name  %>
+  </p>
+
+  <p>
+   班级： <%= @user.periods.first.class_name  %>
   </p>
 
   <!--log-->
   <% @logs.each do |f| %>
     <div>
-      <p><%= f.start_date %></p>
-      <p><%= f.end_date %></p>
+      <p>开始时间：<%= f.start_date %></p>
+      <p>截止时间：<%= f.end_date %></p>
     </div>
   <% end %>
 

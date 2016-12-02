@@ -11,18 +11,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    #@user = User.new user_params
-    #if @user.save
-    #  redirect_to user_path(@user)
-    #elsif
-    #  puts "#{@user}"
-    #  render :text => "lala"
-    #end
     User.create user_params
-    puts "xixixixixxi=#{user_params}"
-    #@user = User.new user_params
-    puts "xixixixixxi=#{@user.inspect}"
-    #render :text => 'alalal'
+    Period.create :period_name => params[:period][:period_name], :class_name => params[:period][:class_name]
     redirect_to users_path
   end
 
@@ -33,26 +23,23 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find params[:id]
-    @periods = Period.all
+    @period = @user.period
+    @state =
   end
 
   def update
     @user = User.find params[:id]
     @user.update user_params
-
     redirect_to users_path
   end
 
   def destroy
     @user = User.find params[:id]
-
     @user.destroy
-
     redirect_to users_path
   end
 
   def show_user
-
     puts "xxxxxuser_search=#{params}"
     if params[:name] == ''
       if params[:state_name] == ''
@@ -67,8 +54,6 @@ class UsersController < ApplicationController
         @results = User.where('name = ?', params[:name]).where('state_name = ?', params[:state_name])
       end
     end
-    #puts "xxxxxuser_search=#{params[:name]}"
-    #render :text => "lalala"
   end
 
   private
